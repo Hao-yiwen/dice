@@ -1,4 +1,4 @@
-# lucky_dice
+# 幸运骰子
 
 ![macOS](https://img.shields.io/badge/macOS-13.0+-00979D?logo=apple&logoColor=white)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0+-0051C3?logo=swift&logoColor=white)
@@ -11,7 +11,7 @@
 
 ## 功能特点：
 
-- 随机掷骰：快速生成随机骰子点数
+- 随机掷骰：快速生成随机幸运点数
 
 ## 安装说明：
 
@@ -28,7 +28,7 @@
 2. 在系统设置的安全性与隐私中允许打开
 3. 如果仍然无法打开，请在终端中运行：
 ```bash
-xattr -cr /Applications/qrcode_generator.app
+xattr -cr /Applications/dice.app
 ```
 
 ## 系统要求：
@@ -37,7 +37,7 @@ macOS 13.0 或更高版本
 
 ## 预览
 
-<img src="preview/dice.png" width="50%" style="display:inline-block;" />
+<img src="showcase/dice.png" width="50%" style="display:inline-block;" />
 
 ## 支持我的工作
 如果这个项目对你有帮助，可以请我喝杯咖啡 ☕️
@@ -47,5 +47,5 @@ macOS 13.0 或更高版本
   <img src="https://img.shields.io/badge/Buy_Me_A_Coffee-支付宝-blue?logo=alipay" alt="Buy Me A Coffee" style="cursor: pointer;">
 </summary>
 <br>
-<img src="preview/alipay_qr.jpg" alt="支付宝收款码" width="300">
+<img src="showcase/alipay_qr.jpg" alt="支付宝收款码" width="300">
 </details>
