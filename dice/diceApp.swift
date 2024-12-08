@@ -23,10 +23,14 @@ class DiceState: ObservableObject {
         isRolling = true
         showResult = false
         
-        // 生成一个真正的随机数
         var randomGenerator = SystemRandomNumberGenerator()
         currentNumber = Int.random(in: 1...6, using: &randomGenerator)
-        print("currentNumber: \(currentNumber)")
+        
+        print("""
+        骰子状态:
+        - 生成的随机数: \(currentNumber)
+        - 预期朝上的面: \(currentNumber)
+        """)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.isRolling = false
@@ -98,47 +102,6 @@ struct DiceMenuView: View {
         return scene
     }
     
-    private func createDiceNode() -> SCNNode {
-            let box = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
-            box.materials = createDiceMaterials()
-            
-            let diceNode = SCNNode(geometry: box)
-            diceNode.position = SCNVector3(0, 0, 0)
-            
-            // 如果正在投掷，添加随机的旋转动画
-            if diceState.isRolling {
-                let randomX = Float.random(in: 8...12) * .pi
-                let randomY = Float.random(in: 8...12) * .pi
-                let randomZ = Float.random(in: 8...12) * .pi
-                
-                let rotateAction = SCNAction.rotateBy(
-                    x: CGFloat(randomX),
-                    y: CGFloat(randomY), 
-                    z: CGFloat(randomZ),
-                    duration: 1.0
-                )
-                diceNode.runAction(rotateAction)
-            } else {
-                // 根据点数设置正确的旋转角度
-                diceNode.eulerAngles = getSimpleRotationForNumber(diceState.currentNumber)
-            }
-            
-            return diceNode
-        }
-        
-        private func getSimpleRotationForNumber(_ number: Int) -> SCNVector3 {
-            // 使用 Float.pi 来避免歧义
-            switch number {
-            case 1: return SCNVector3(0, 0, Float.pi)
-            case 2: return SCNVector3(Float.pi/2, 0, 0)
-            case 3: return SCNVector3(0, -Float.pi/2, 0)
-            case 4: return SCNVector3(0, Float.pi/2, 0)
-            case 5: return SCNVector3(-Float.pi/2, 0, 0)
-            case 6: return SCNVector3(0, 0, 0)
-            default: return SCNVector3(0, 0, 0)
-            }
-        }
-
         // 添加创建骰子面的函数
         private func createDiceFace(number: Int) -> NSImage {
             let size = NSSize(width: 512, height: 512)
@@ -186,10 +149,83 @@ struct DiceMenuView: View {
         }
     
     private func createDiceMaterials() -> [SCNMaterial] {
-        let numbers = [6, 5, 1, 2, 3, 4] // 正确的面顺序
+        // SceneKit 的六个面的顺序是：
+        // 1. 前面（-Z）
+        // 2. 右面（+X）
+        // 3. 后面（+Z）
+        // 4. 左面（-X）
+        // 5. 顶面（+Y）
+        // 6. 底面（-Y）
+        
+        // 让我们确保当骰子不旋转时（角度都是0）：
+        // - 1在前面（-Z）
+        // - 3在右面（+X）
+        // - 6在后面（+Z）
+        // - 4在左面（-X）
+        // - 5在顶面（+Y）
+        // - 2在底面（-Y）
+        let numbers = [1, 3, 6, 4, 5, 2]
         return numbers.map { createDiceMaterial(for: $0) }
     }
+
+    private func getSimpleRotationForNumber(_ number: Int) -> SCNVector3 {
+        // 当我们想要某个数字朝上时，需要将对应的面旋转到顶部（+Y）位置
+        switch number {
+        case 1:
+            // 将前面翻转到顶部
+            return SCNVector3(-Float.pi/2, 0, 0)
+        case 2:
+            // 将底面翻转到顶部
+            return SCNVector3(Float.pi, 0, 0)
+        case 3:
+            // 将右面翻转到顶部
+            return SCNVector3(0, 0, Float.pi/2)
+        case 4:
+            // 将左面翻转到顶部
+            return SCNVector3(0, 0, -Float.pi/2)
+        case 5:
+            // 5已经在顶部，不需要旋转
+            return SCNVector3(0, 0, 0)
+        case 6:
+            // 将后面翻转到顶部
+            return SCNVector3(Float.pi/2, 0, 0)
+        default:
+            return SCNVector3(0, 0, 0)
+        }
+    }
     
+    private func createDiceNode() -> SCNNode {
+        let box = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
+        box.materials = createDiceMaterials()
+        
+        let diceNode = SCNNode(geometry: box)
+        diceNode.position = SCNVector3(0, 0, 0)
+        
+        if diceState.isRolling {
+            // 先进行随机旋转动画
+            let rotateAction = SCNAction.rotateBy(
+                x: CGFloat.random(in: 8...12) * .pi,
+                y: CGFloat.random(in: 8...12) * .pi,
+                z: CGFloat.random(in: 8...12) * .pi,
+                duration: 1.0
+            )
+            
+            // 动画结束后，旋转到目标角度
+            let finalRotation = getSimpleRotationForNumber(diceState.currentNumber)
+            let finalAction = SCNAction.rotateTo(
+                x: CGFloat(finalRotation.x),
+                y: CGFloat(finalRotation.y),
+                z: CGFloat(finalRotation.z),
+                duration: 0.2
+            )
+            
+            diceNode.runAction(SCNAction.sequence([rotateAction, finalAction]))
+        } else {
+            diceNode.eulerAngles = getSimpleRotationForNumber(diceState.currentNumber)
+        }
+        
+        return diceNode
+    }
     private func createDiceMaterial(for number: Int) -> SCNMaterial {
         let material = SCNMaterial()
         material.diffuse.contents = NSColor.white
