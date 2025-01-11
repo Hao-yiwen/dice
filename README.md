@@ -57,8 +57,7 @@ macOS 13.0 或更高版本
 
 <img src="showcase/dice.png" width="50%" style="display:inline-block;" />
 
-<img src="showcase/dice_ios.png" width="40%" style="display:inline-block; margin-right: 20px;" />
-<img src="showcase/dice_ios_widget.png" width="40%" style="display:inline-block;" />
+<img src="showcase/dice_ios.png" width="30%" style="display:inline-block; margin-right: 20px;" /><img src="showcase/dice_ios_widget.png" width="30%" style="display:inline-block;" />
 
 ## 支持我的工作
 
