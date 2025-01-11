@@ -44,16 +44,6 @@
 		F69193B22D328A3A00594168 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F69193C52D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = F69193AD2D328A3A00594168 /* dice_ios_widgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3955FFD72D007FF4003C6E4B /* dice_mac */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -72,9 +62,6 @@
 		};
 		F69193B42D328A3A00594168 /* dice_ios_widget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				F69193C52D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */,
-			);
 			path = dice_ios_widget;
 			sourceTree = "<group>";
 		};
