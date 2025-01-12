@@ -51,7 +51,8 @@ xattr -cr /Applications/dice.app
 
 ## 系统要求：
 
-macOS 13.0 或更高版本
+- macOS 13.0 或更高版本
+- ios 16.0 或更高版本
 
 ## 预览
 
