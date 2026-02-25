@@ -37,12 +37,22 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		3955FFD52D007FF4003C6E4B /* dice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dice.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3955FFD52D007FF4003C6E4B /* 幸运骰子.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "幸运骰子.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69193992D32805300594168 /* dice_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dice_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69193AE2D328A3A00594168 /* dice_ios_widgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = dice_ios_widgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		F69193B02D328A3A00594168 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		F69193B22D328A3A00594168 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F69193D02D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F69193AD2D328A3A00594168 /* dice_ios_widgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3955FFD72D007FF4003C6E4B /* dice_mac */ = {
@@ -69,16 +79,6 @@
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F69193D02D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = F69193AD2D328A3A00594168 /* dice_ios_widgetExtension */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3955FFD22D007FF4003C6E4B /* Frameworks */ = {
@@ -122,7 +122,7 @@
 		3955FFD62D007FF4003C6E4B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3955FFD52D007FF4003C6E4B /* dice.app */,
+				3955FFD52D007FF4003C6E4B /* 幸运骰子.app */,
 				F69193992D32805300594168 /* dice_ios.app */,
 				F69193AE2D328A3A00594168 /* dice_ios_widgetExtension.appex */,
 			);
@@ -161,7 +161,7 @@
 			packageProductDependencies = (
 			);
 			productName = dice;
-			productReference = 3955FFD52D007FF4003C6E4B /* dice.app */;
+			productReference = 3955FFD52D007FF4003C6E4B /* 幸运骰子.app */;
 			productType = "com.apple.product-type.application";
 		};
 		F69193982D32805300594168 /* dice_ios */ = {
@@ -239,6 +239,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = 3955FFCC2D007FF4003C6E4B;
 			minimizedProjectReferenceProxies = 1;
@@ -434,16 +435,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = dice/dice.entitlements;
+				CODE_SIGN_ENTITLEMENTS = dice_mac/dice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"dice/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "\"dice_mac/Preview Content\"";
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "幸运骰子";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -453,7 +455,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yiwen.dice;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "幸运骰子";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -464,16 +466,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = dice/dice.entitlements;
+				CODE_SIGN_ENTITLEMENTS = dice_mac/dice.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"dice/Preview Content\"";
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_ASSET_PATHS = "\"dice_mac/Preview Content\"";
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "幸运骰子";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -483,7 +486,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.5;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.yiwen.dice;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "幸运骰子";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -495,7 +498,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"dice_ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_PREVIEWS = YES;
@@ -532,7 +535,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"dice_ios/Preview Content\"";
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_PREVIEWS = YES;

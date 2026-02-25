@@ -5,7 +5,7 @@ struct DiceMenuBarApp: App {
     @StateObject private var diceState = DiceState()
     
     var body: some Scene {
-        MenuBarExtra("骰子", systemImage: "dice") {
+        MenuBarExtra(L10n.text("app.name"), systemImage: "dice") {
             DiceMenuView()
                 .environmentObject(diceState)
         }

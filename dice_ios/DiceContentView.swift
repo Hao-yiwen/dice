@@ -4,58 +4,76 @@ import SceneKit
 
 struct DiceContentView: View {
     @EnvironmentObject var diceState: DiceState
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            Spacer()
-            
-            // 骰子3D显示
-            let scene = DiceRenderer.createDiceScene(
-                currentNumber: diceState.currentNumber,
-                isRolling: diceState.isRolling
-            )
+    @State private var showAbout = false
 
-            let camera = DiceRenderer.createCamera()
-            SceneView(
-                scene: scene,
-                pointOfView: camera,
-                options: [
-                    .autoenablesDefaultLighting,
-                    .temporalAntialiasingEnabled
-                ]
-            )
-            .frame(width: UIScreen.main.bounds.width * 0.8,
-                   height: UIScreen.main.bounds.width * 0.8)
-            .clipShape(RoundedRectangle(cornerRadius: 16))
-            .background(Color(UIColor.systemBackground))
-            
-            Spacer()
-            
-            // 掷骰子按钮
-            Button(action: {
-                debugLog("Rolling Dice")
-                withAnimation {
-                    diceState.rollDice()
+    var body: some View {
+        NavigationStack {
+        GeometryReader { geo in
+            VStack(spacing: 24) {
+                Spacer()
+
+                // 骰子3D显示
+                let diceSize = min(geo.size.width, geo.size.height * 0.62)
+                let scene = DiceRenderer.createDiceScene(
+                    currentNumber: diceState.currentNumber,
+                    isRolling: diceState.isRolling
+                )
+                let camera = DiceRenderer.createCamera()
+                SceneView(
+                    scene: scene,
+                    pointOfView: camera,
+                    options: [
+                        .autoenablesDefaultLighting,
+                        .temporalAntialiasingEnabled
+                    ]
+                )
+                .frame(width: diceSize, height: diceSize)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+
+                Spacer()
+
+                // 掷骰子按钮
+                Button(action: {
+                    debugLog("Rolling Dice")
+                    withAnimation {
+                        diceState.rollDice()
+                    }
+                    let generator = UIImpactFeedbackGenerator(style: .medium)
+                    generator.impactOccurred()
+                }) {
+                    HStack {
+                        Image(systemName: "dice")
+                        Text(L10n.text("action.roll"))
+                    }
+                    .font(.title3)
+                    .frame(maxWidth: diceSize - 32)
+                    .padding(.vertical, 16)
+                    .background(diceState.isRolling ? Color.gray : Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(14)
                 }
-                
-                let generator = UIImpactFeedbackGenerator(style: .medium)
-                generator.impactOccurred()
-            }) {
-                HStack {
-                    Image(systemName: "dice")
-                    Text("摇一摇")
-                }
-                .frame(maxWidth: UIScreen.main.bounds.width * 0.8)
-                .padding(.vertical, 15)
-                .background(diceState.isRolling ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(12)
+                .disabled(diceState.isRolling)
+
+                Spacer().frame(height: 16)
             }
-            .disabled(diceState.isRolling)
-            
-            Spacer()
+            .frame(maxWidth: .infinity)
         }
         .padding()
+        .navigationTitle(L10n.text("app.name"))
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    showAbout = true
+                } label: {
+                    Image(systemName: "info.circle")
+                }
+            }
+        }
+        .sheet(isPresented: $showAbout) {
+            AboutView()
+        }
+        } // NavigationStack
         .onShake {
             if !diceState.isRolling {
                 debugLog("Shake detected - triggering roll")

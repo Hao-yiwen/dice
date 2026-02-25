@@ -1,0 +1,35 @@
+"app.name" = "Lucky Dice";
+"app.short_name" = "Dice";
+"action.roll" = "Roll";
+"menu.quit" = "Quit";
+
+"about.title" = "About";
+"about.section.about" = "About";
+"about.section.intro" = "Introduction";
+"about.description" = "A simple 3D dice app. Tap the button or shake your phone to roll the dice.";
+"about.version_format" = "Version %@";
+"about.app_name" = "Lucky Dice";
+"about.privacy_policy" = "Privacy Policy";
+"about.open_source" = "Source Repository";
+
+"privacy.title" = "Privacy Policy";
+"privacy.last_updated" = "Last updated: February 2025";
+"privacy.intro" = "Lucky Dice (the \"App\") respects and protects your privacy. This policy explains how the App handles your information.";
+"privacy.data_collection.title" = "Data Collection";
+"privacy.data_collection.body" = "This App does not collect, store, or transmit any personal data. All actions are completed locally on your device.";
+"privacy.network_access.title" = "Network Access";
+"privacy.network_access.body" = "This App does not require an internet connection and does not send data to any server.";
+"privacy.third_party.title" = "Third-Party Services";
+"privacy.third_party.body" = "This App does not use third-party analytics, ads, or tracking services.";
+"privacy.permissions.title" = "Device Permissions";
+"privacy.permissions.body" = "This App uses motion sensors to detect shake gestures and haptics for vibration feedback. These functions run entirely on-device and do not transmit any data.";
+"privacy.children.title" = "Children's Privacy";
+"privacy.children.body" = "This App does not collect personal information from anyone, including children.";
+"privacy.changes.title" = "Policy Changes";
+"privacy.changes.body" = "If this privacy policy changes, the update will be described in a future app update.";
+"privacy.contact.title" = "Contact";
+"privacy.contact.body" = "If you have questions, please submit an issue on GitHub:";
+
+"common.done" = "Done";
+"widget.display_name" = "Dice";
+"widget.description" = "Tap to roll the dice";

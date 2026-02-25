@@ -68,7 +68,7 @@ struct dice_ios_widgetEntryView : View {
                 HStack(spacing: 6) {
                     Image(systemName: "arrow.2.circlepath")
                         .font(.system(size: 13))
-                    Text("摇一摇")
+                    Text(L10n.text("action.roll"))
                         .font(.system(size: 15, weight: .medium))
                 }
                 .frame(maxWidth: .infinity)
@@ -115,8 +115,8 @@ struct dice_ios_widget: Widget {
                     Color(UIColor.systemBackground)
                 }
         }
-        .configurationDisplayName("骰子")
-        .description("点击摇骰子")
+        .configurationDisplayName(L10n.text("widget.display_name"))
+        .description(L10n.text("widget.description"))
         .supportedFamilies([.systemSmall])
     }
 }

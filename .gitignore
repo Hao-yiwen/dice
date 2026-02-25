@@ -1,0 +1,36 @@
+# Xcode
+build/
+DerivedData/
+*.xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+
+# Xcode project user data
+dice.xcodeproj/xcuserdata/
+dice.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Swift Package Manager
+.build/
+Packages/
+Package.pins
+Package.resolved
+
+# macOS
+.DS_Store
+._*
+
+# Build artifacts
+*.ipa
+*.dSYM.zip
+*.dSYM
+*.dmg
+*.xcarchive
+
+# CI/build temp files
+build/
+
+# Secrets (never commit)
+*.p12
+*.p8
+*.mobileprovision
+*.provisionprofile

@@ -1,58 +1,46 @@
 # 幸运骰子
 
 ![macOS](https://img.shields.io/badge/macOS-13.0+-00979D?logo=apple&logoColor=white)
-![iOS](https://img.shields.io/badge/iOS-16.0+-000000?logo=apple&logoColor=white)
+![iOS](https://img.shields.io/badge/iOS-17.0+-000000?logo=apple&logoColor=white)
 ![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0+-0051C3?logo=swift&logoColor=white)
 
-一个简单的幸运骰子应用，支持 macOS 状态栏和 iOS 设备。
+一个简洁的 3D 骰子应用，支持 macOS 状态栏和 iOS 设备。
 
 ## 下载安装
 
 ### macOS
 
-[下载最新版本](https://github.com/Hao-yiwen/dice/releases/)
+[下载最新版本](https://github.com/Hao-yiwen/dice/releases/) — DMG 已通过 Apple Developer ID 签名和公证，下载后直接使用。
 
 ### iOS
 
-目前 iOS 版本需要自行克隆代码并使用 Xcode 打包安装。
+[App Store 下载](https://apps.apple.com/app/TODO) (即将上架)
 
-## 功能特点：
+## 功能特点
 
-- 随机掷骰：快速生成随机幸运点数
-- iOS 小组件支持：方便快捷掷骰
+- 精美 3D 骰子渲染
+- 点击按钮或摇一摇掷骰子
+- iOS 小组件支持，一键直达
+- 完全离线，无广告，不收集任何数据
+- 支持中英文
 
-## 安装说明：
+## 安装说明
 
 ### macOS
 
-- 下载 QRCodeGenerator.dmg
-- 打开 DMG 文件
-- 将应用拖入 Applications 文件夹
-- 首次运行时右键点击应用选择"打开"
+1. 下载 DiceGenerator.dmg
+2. 打开 DMG 文件
+3. 将应用拖入 Applications 文件夹
 
 ### iOS
 
-1. 克隆项目代码
-2. 使用 Xcode 打开项目
-3. 选择开发者账号
-4. 连接设备并构建运行
+1. 从 App Store 下载安装
+2. 或克隆项目代码，使用 Xcode 打开并构建运行
 
-## 常见问题
-
-如果在 macOS 上提示"无法打开应用程序"，请尝试：
-
-1. 右键点击应用选择"打开"
-2. 在系统设置的安全性与隐私中允许打开
-3. 如果仍然无法打开，请在终端中运行：
-
-```bash
-xattr -cr /Applications/dice.app
-```
-
-## 系统要求：
+## 系统要求
 
 - macOS 13.0 或更高版本
-- ios 16.0 或更高版本
+- iOS 17.0 或更高版本
 
 ## 预览
 
