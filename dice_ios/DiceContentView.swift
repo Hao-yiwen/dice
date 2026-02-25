@@ -14,26 +14,13 @@ struct DiceContentView: View {
                 currentNumber: diceState.currentNumber,
                 isRolling: diceState.isRolling
             )
-            
-            let _ = print("""
-            Scene Debug Info:
-            - Current Number: \(diceState.currentNumber)
-            - Is Rolling: \(diceState.isRolling)
-            - Child Nodes Count: \(scene.rootNode.childNodes.count)
-            """)
-            
+
             let camera = DiceRenderer.createCamera()
-            let _ = print("""
-            Camera Debug Info:
-            - Position: \(camera.position)
-            - Euler Angles: \(camera.eulerAngles)
-            """)
             SceneView(
                 scene: scene,
                 pointOfView: camera,
                 options: [
                     .autoenablesDefaultLighting,
-                    .allowsCameraControl,
                     .temporalAntialiasingEnabled
                 ]
             )
@@ -46,11 +33,10 @@ struct DiceContentView: View {
             
             // 掷骰子按钮
             Button(action: {
-                print("\nRolling Dice - Before: \(diceState.currentNumber)")
+                debugLog("Rolling Dice")
                 withAnimation {
                     diceState.rollDice()
                 }
-                print("Rolling Dice - After: \(diceState.currentNumber)")
                 
                 let generator = UIImpactFeedbackGenerator(style: .medium)
                 generator.impactOccurred()
@@ -72,7 +58,7 @@ struct DiceContentView: View {
         .padding()
         .onShake {
             if !diceState.isRolling {
-                print("Shake detected - triggering roll")
+                debugLog("Shake detected - triggering roll")
                 diceState.rollDice()
                 let generator = UIImpactFeedbackGenerator(style: .heavy)
                 generator.impactOccurred()
@@ -103,4 +89,10 @@ extension UIWindow {
             NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
         }
     }
+}
+
+private func debugLog(_ message: @autoclosure () -> String) {
+    #if DEBUG
+    print(message())
+    #endif
 }

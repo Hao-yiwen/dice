@@ -76,12 +76,7 @@ class DiceRenderer {
             cameraNode.camera?.zNear = 0.1
             cameraNode.position = SCNVector3(0, 4, 2.5)  // 调高相机位置，减小z值
             cameraNode.eulerAngles = SCNVector3(x: -0.9, y: 0, z: 0)  // 增大俯视角度
-            
-            // 添加约束以确保相机始终看向骰子
-            let constraint = SCNLookAtConstraint(target: nil)
-            constraint.isGimbalLockEnabled = true
-            cameraNode.constraints = [constraint]
-            
+
             return cameraNode
         #endif
     }

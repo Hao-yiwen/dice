@@ -9,9 +9,11 @@ typealias PlatformImage = UIImage
 #endif
 
 class DiceFaceRenderer {
+    private static let numbers = [1, 3, 6, 4, 5, 2]
+    private static let cachedMaterials: [SCNMaterial] = numbers.map { createDiceMaterial(for: $0) }
+
     static func createDiceMaterials() -> [SCNMaterial] {
-        let numbers = [1, 3, 6, 4, 5, 2]
-        return numbers.map { createDiceMaterial(for: $0) }
+        cachedMaterials.map { $0.copy() as! SCNMaterial }
     }
     
     static func dotsForNumber(_ number: Int) -> [CGPoint] {
@@ -94,7 +96,9 @@ class DiceFaceRenderer {
 
         // 确保图像有效
         if image.size.width == 0 || image.size.height == 0 {
+            #if DEBUG
             print("Warning: Generated image has zero size")
+            #endif
             return UIImage()
         }
 

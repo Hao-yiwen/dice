@@ -62,10 +62,23 @@
 		};
 		F69193B42D328A3A00594168 /* dice_ios_widget */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F69193D02D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */,
+			);
 			path = dice_ios_widget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F69193D02D328A3C00594168 /* Exceptions for "dice_ios_widget" folder in "dice_ios_widgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F69193AD2D328A3A00594168 /* dice_ios_widgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3955FFD22D007FF4003C6E4B /* Frameworks */ = {
