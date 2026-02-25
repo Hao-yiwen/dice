@@ -1,0 +1,35 @@
+"app.name" = "幸运骰子";
+"app.short_name" = "骰子";
+"action.roll" = "摇一摇";
+"menu.quit" = "退出";
+
+"about.title" = "关于";
+"about.section.about" = "关于";
+"about.section.intro" = "简介";
+"about.description" = "一款简洁的 3D 骰子应用，支持点击按钮或摇一摇手机来掷骰子。";
+"about.version_format" = "版本 %@";
+"about.app_name" = "幸运骰子";
+"about.privacy_policy" = "隐私政策";
+"about.open_source" = "开源仓库";
+
+"privacy.title" = "隐私政策";
+"privacy.last_updated" = "最后更新：2025年2月";
+"privacy.intro" = "幸运骰子（以下简称「本应用」）尊重并保护您的隐私。本隐私政策说明本应用如何处理您的信息。";
+"privacy.data_collection.title" = "数据收集";
+"privacy.data_collection.body" = "本应用不收集、存储或传输任何个人数据。所有操作均在您的设备本地完成。";
+"privacy.network_access.title" = "网络访问";
+"privacy.network_access.body" = "本应用不需要网络连接，不会向任何服务器发送数据。";
+"privacy.third_party.title" = "第三方服务";
+"privacy.third_party.body" = "本应用不使用任何第三方分析、广告或追踪服务。";
+"privacy.permissions.title" = "设备权限";
+"privacy.permissions.body" = "本应用使用设备的运动传感器来检测摇一摇手势，以及触觉反馈引擎来提供振动反馈。这些功能完全在设备本地运行，不会产生任何数据传输。";
+"privacy.children.title" = "儿童隐私";
+"privacy.children.body" = "本应用不收集任何人（包括儿童）的个人信息。";
+"privacy.changes.title" = "变更通知";
+"privacy.changes.body" = "如果本隐私政策发生变更，我们会在应用更新中说明。";
+"privacy.contact.title" = "联系方式";
+"privacy.contact.body" = "如有疑问，请通过 GitHub 仓库提交 Issue：";
+
+"common.done" = "完成";
+"widget.display_name" = "骰子";
+"widget.description" = "点击摇骰子";

@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3955FFD42D007FF4003C6E4B"
-               BuildableName = "&#x5e78;&#x8fd0;&#x9ab0;&#x5b50;.app"
-               BlueprintName = "dice"
+               BlueprintIdentifier = "F69193982D32805300594168"
+               BuildableName = "dice_ios.app"
+               BlueprintName = "dice_ios"
                ReferencedContainer = "container:dice.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3955FFD42D007FF4003C6E4B"
-            BuildableName = "&#x5e78;&#x8fd0;&#x9ab0;&#x5b50;.app"
-            BlueprintName = "dice"
+            BlueprintIdentifier = "F69193982D32805300594168"
+            BuildableName = "dice_ios.app"
+            BlueprintName = "dice_ios"
             ReferencedContainer = "container:dice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3955FFD42D007FF4003C6E4B"
-            BuildableName = "&#x5e78;&#x8fd0;&#x9ab0;&#x5b50;.app"
-            BlueprintName = "dice"
+            BlueprintIdentifier = "F69193982D32805300594168"
+            BuildableName = "dice_ios.app"
+            BlueprintName = "dice_ios"
             ReferencedContainer = "container:dice.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

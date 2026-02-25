@@ -22,14 +22,14 @@ struct DiceMenuView: View {
                 pointOfView: DiceRenderer.createCamera(),
                 options: [.autoenablesDefaultLighting]
             )
-            .frame(width: 200, height: 200)
+            .frame(width: 216, height: 216)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             
             // 掷骰子按钮
             Button(action: { diceState.rollDice() }) {
                 HStack {
                     Image(systemName: "dice")
-                    Text("摇一摇")
+                    Text(L10n.text("action.roll"))
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
@@ -55,7 +55,7 @@ struct DiceMenuView: View {
                     }) {
                         HStack {
                             Image(systemName: "power")
-                            Text("退出")
+                            Text(L10n.text("menu.quit"))
                         }
                         .foregroundColor(.red)
                     }
