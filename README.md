@@ -46,7 +46,7 @@
 
 <img src="showcase/dice.png" width="50%" style="display:inline-block;" />
 
-<img src="showcase/dice_ios.png" width="30%" style="display:inline-block; margin-right: 20px;" /><img src="showcase/dice_ios_widget.png" width="30%" style="display:inline-block;" />
+<img src="showcase/dice_ios.png" width="30%" style="display:inline-block; margin-right: 20px;" />
 
 ## 支持我的工作
 
