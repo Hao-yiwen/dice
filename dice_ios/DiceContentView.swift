@@ -1,10 +1,18 @@
 // iOS/Views/DiceContentView.swift
 import SwiftUI
 import SceneKit
+import StoreKit
+import OSLog
 
 struct DiceContentView: View {
     @EnvironmentObject var diceState: DiceState
+    @Environment(\.requestReview) private var requestReview
     @State private var showAbout = false
+    @State private var reviewTracker = ReviewPromptTracker()
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "com.yiwen.dice-ios",
+        category: "评分流程"
+    )
 
     var body: some View {
         NavigationStack {
@@ -34,12 +42,7 @@ struct DiceContentView: View {
 
                 // 掷骰子按钮
                 Button(action: {
-                    debugLog("Rolling Dice")
-                    withAnimation {
-                        diceState.rollDice()
-                    }
-                    let generator = UIImpactFeedbackGenerator(style: .medium)
-                    generator.impactOccurred()
+                    handleRoll(source: .button)
                 }) {
                     HStack {
                         Image(systemName: "dice")
@@ -75,13 +78,39 @@ struct DiceContentView: View {
         }
         } // NavigationStack
         .onShake {
-            if !diceState.isRolling {
-                debugLog("Shake detected - triggering roll")
-                diceState.rollDice()
-                let generator = UIImpactFeedbackGenerator(style: .heavy)
-                generator.impactOccurred()
-            }
+            handleRoll(source: .shake)
         }
+    }
+
+    /// 统一处理按钮与摇一摇掷骰入口，并在满足条件时触发自动评分。
+    private func handleRoll(source: RollTriggerSource) {
+        logger.info(
+            "[评分流程] 掷骰入口 source=\(source.rawValue, privacy: .public) isRolling=\(String(diceState.isRolling), privacy: .public)"
+        )
+
+        guard !diceState.isRolling else {
+            logger.info(
+                "[评分流程] 掷骰入口被忽略 source=\(source.rawValue, privacy: .public) reason=骰子正在滚动"
+            )
+            return
+        }
+
+        withAnimation {
+            diceState.rollDice()
+        }
+
+        let feedbackStyle: UIImpactFeedbackGenerator.FeedbackStyle = source == .shake ? .heavy : .medium
+        let generator = UIImpactFeedbackGenerator(style: feedbackStyle)
+        generator.impactOccurred()
+
+        let shouldRequestReview = reviewTracker.recordRollAndEvaluateAutoPrompt(source: source)
+        logger.info(
+            "[评分流程] 自动评分判定结果 source=\(source.rawValue, privacy: .public) shouldRequest=\(String(shouldRequestReview), privacy: .public) currentCount=\(reviewTracker.currentRollCount(), privacy: .public)"
+        )
+        guard shouldRequestReview else { return }
+
+        logger.info("[评分流程] 自动触发系统评分请求 source=\(source.rawValue, privacy: .public)")
+        requestReview()
     }
 }
 
@@ -107,10 +136,4 @@ extension UIWindow {
             NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
         }
     }
-}
-
-private func debugLog(_ message: @autoclosure () -> String) {
-    #if DEBUG
-    print(message())
-    #endif
 }

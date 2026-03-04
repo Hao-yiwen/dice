@@ -1,6 +1,8 @@
 "app.name" = "幸运骰子";
 "app.short_name" = "骰子";
 "action.roll" = "摇一摇";
+"action.rate" = "去评分";
+"accessibility.rate" = "给应用评分";
 "menu.quit" = "退出";
 
 "about.title" = "关于";

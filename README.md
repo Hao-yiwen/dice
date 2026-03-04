@@ -14,7 +14,7 @@
 
 ### iOS
 
-[App Store 下载](https://apps.apple.com/app/TODO) (即将上架)
+[App Store 下载](https://apps.apple.com/cn/app/id6759647033)
 
 ## 功能特点
 
