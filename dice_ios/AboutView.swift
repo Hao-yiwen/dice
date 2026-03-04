@@ -1,8 +1,15 @@
 import SwiftUI
+import StoreKit
+import OSLog
 
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.requestReview) private var requestReview
     @State private var showPrivacyPolicy = false
+    private let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "com.yiwen.dice-ios",
+        category: "评分流程"
+    )
 
     private var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0"
@@ -32,6 +39,14 @@ struct AboutView: View {
 
                 // Links
                 Section {
+                    Button {
+                        logger.info("[评分流程] About页评分按钮点击，准备调用系统评分请求")
+                        requestReview()
+                    } label: {
+                        Label(L10n.text("action.rate"), systemImage: "star.bubble")
+                    }
+                    .accessibilityLabel(L10n.text("accessibility.rate"))
+
                     Button {
                         showPrivacyPolicy = true
                     } label: {

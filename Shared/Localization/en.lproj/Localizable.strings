@@ -1,6 +1,8 @@
 "app.name" = "Lucky Dice";
 "app.short_name" = "Dice";
 "action.roll" = "Roll";
+"action.rate" = "Rate";
+"accessibility.rate" = "Rate this app";
 "menu.quit" = "Quit";
 
 "about.title" = "About";
