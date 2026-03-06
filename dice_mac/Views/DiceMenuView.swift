@@ -17,7 +17,8 @@ struct DiceMenuView: View {
             SceneView(
                 scene: DiceRenderer.createDiceScene(
                     currentNumber: diceState.currentNumber,
-                    isRolling: diceState.isRolling
+                    isRolling: diceState.isRolling,
+                    faceRotationQuarterTurns: diceState.visibleFaceRotationQuarterTurns
                 ),
                 pointOfView: DiceRenderer.createCamera(),
                 options: [.autoenablesDefaultLighting]

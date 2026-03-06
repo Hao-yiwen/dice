@@ -24,7 +24,8 @@ struct DiceContentView: View {
                 let diceSize = min(geo.size.width, geo.size.height * 0.62)
                 let scene = DiceRenderer.createDiceScene(
                     currentNumber: diceState.currentNumber,
-                    isRolling: diceState.isRolling
+                    isRolling: diceState.isRolling,
+                    faceRotationQuarterTurns: diceState.visibleFaceRotationQuarterTurns
                 )
                 let camera = DiceRenderer.createCamera()
                 SceneView(
@@ -37,6 +38,7 @@ struct DiceContentView: View {
                 )
                 .frame(width: diceSize, height: diceSize)
                 .clipShape(RoundedRectangle(cornerRadius: 20))
+                .accessibilityLabel(L10n.text("result.accessibility", diceState.currentNumber))
 
                 Spacer()
 
@@ -75,6 +77,21 @@ struct DiceContentView: View {
         }
         .sheet(isPresented: $showAbout) {
             AboutView()
+        }
+        .onChange(of: diceState.currentNumber) { _, newValue in
+            logger.info(
+                "[评分流程] 骰子点数已更新 currentNumber=\(newValue, privacy: .public) isRolling=\(String(diceState.isRolling), privacy: .public)"
+            )
+        }
+        .onChange(of: diceState.showResult) { _, newValue in
+            logger.info(
+                "[评分流程] 结果展示状态变更 showResult=\(String(newValue), privacy: .public) currentNumber=\(diceState.currentNumber, privacy: .public)"
+            )
+        }
+        .onChange(of: diceState.visibleFaceRotationQuarterTurns) { _, newValue in
+            logger.info(
+                "[评分流程] 骰子可见朝向已更新 visibleFaceRotationQuarterTurns=\(newValue, privacy: .public) currentNumber=\(diceState.currentNumber, privacy: .public)"
+            )
         }
         } // NavigationStack
         .onShake {

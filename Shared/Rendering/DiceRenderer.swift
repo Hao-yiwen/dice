@@ -4,13 +4,21 @@ class DiceRenderer {
     static func createDiceNode(
         currentNumber: Int,
         isRolling: Bool,
+        faceRotationQuarterTurns: Int,
         materials: [SCNMaterial]
     ) -> SCNNode {
         let box = SCNBox(width: 1, height: 1, length: 1, chamferRadius: 0.1)
         box.materials = materials
         
         let diceNode = SCNNode(geometry: box)
-        diceNode.position = SCNVector3(0, 0, 0)
+        let containerNode = SCNNode()
+        containerNode.position = SCNVector3(0, 0, 0)
+        containerNode.eulerAngles = SCNVector3(
+            0,
+            yawAngleForQuarterTurns(faceRotationQuarterTurns),
+            0
+        )
+        containerNode.addChildNode(diceNode)
         
         if isRolling {
             let rotateAction = SCNAction.rotateBy(
@@ -20,7 +28,7 @@ class DiceRenderer {
                 duration: 1.0
             )
             
-            let finalRotation = getSimpleRotationForNumber(currentNumber)
+            let finalRotation = getBaseRotationForNumber(currentNumber)
             let finalAction = SCNAction.rotateTo(
                 x: CGFloat(finalRotation.x),
                 y: CGFloat(finalRotation.y),
@@ -30,13 +38,13 @@ class DiceRenderer {
             
             diceNode.runAction(SCNAction.sequence([rotateAction, finalAction]))
         } else {
-            diceNode.eulerAngles = getSimpleRotationForNumber(currentNumber)
+            diceNode.eulerAngles = getBaseRotationForNumber(currentNumber)
         }
         
-        return diceNode
+        return containerNode
     }
     
-    static func getSimpleRotationForNumber(_ number: Int) -> SCNVector3 {
+    static func getBaseRotationForNumber(_ number: Int) -> SCNVector3 {
         // 当我们想要某个数字朝上时，需要将对应的面旋转到顶部（+Y）位置
         switch number {
         case 1:
@@ -61,6 +69,12 @@ class DiceRenderer {
             return SCNVector3(0, 0, 0)
         }
     }
+
+    private static func yawAngleForQuarterTurns(_ quarterTurns: Int) -> Float {
+        // 只围绕竖直方向旋转，保证顶部点数不变，但前侧面不再长期固定。
+        let normalizedQuarterTurns = ((quarterTurns % 4) + 4) % 4
+        return Float(normalizedQuarterTurns) * (.pi / 2)
+    }
     
     static func createCamera() -> SCNNode {
         #if os(macOS)
@@ -74,19 +88,24 @@ class DiceRenderer {
             cameraNode.camera = SCNCamera()
             cameraNode.camera?.zFar = 100
             cameraNode.camera?.zNear = 0.1
-            cameraNode.position = SCNVector3(0, 4, 2.5)  // 调高相机位置，减小z值
-            cameraNode.eulerAngles = SCNVector3(x: -0.9, y: 0, z: 0)  // 增大俯视角度
+            cameraNode.position = SCNVector3(0, 4, 2.5)
+            cameraNode.eulerAngles = SCNVector3(x: -0.9, y: 0, z: 0)
 
             return cameraNode
         #endif
     }
     
-    static func createDiceScene(currentNumber: Int, isRolling: Bool) -> SCNScene {
+    static func createDiceScene(
+        currentNumber: Int,
+        isRolling: Bool,
+        faceRotationQuarterTurns: Int
+    ) -> SCNScene {
         #if os(macOS)
         let scene = SCNScene()
         let diceNode = createDiceNode(
             currentNumber: currentNumber,
             isRolling: isRolling,
+            faceRotationQuarterTurns: faceRotationQuarterTurns,
             materials: DiceFaceRenderer.createDiceMaterials()
         )
         scene.rootNode.addChildNode(diceNode)
@@ -118,6 +137,7 @@ class DiceRenderer {
         let diceNode = createDiceNode(
             currentNumber: currentNumber,
             isRolling: isRolling,
+            faceRotationQuarterTurns: faceRotationQuarterTurns,
             materials: DiceFaceRenderer.createDiceMaterials()
         )
 
