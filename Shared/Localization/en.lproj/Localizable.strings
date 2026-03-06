@@ -3,6 +3,7 @@
 "action.roll" = "Roll";
 "action.rate" = "Rate";
 "accessibility.rate" = "Rate this app";
+"result.accessibility" = "The current dice result is %d";
 "menu.quit" = "Quit";
 
 "about.title" = "About";
