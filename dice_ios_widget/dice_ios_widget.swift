@@ -14,15 +14,12 @@ struct Provider: TimelineProvider {
         SimpleEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+    func snapshot(in context: Context) async -> SimpleEntry {
+        SimpleEntry(date: Date())
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        let timeline = Timeline(entries: [entry], policy: .never)
-        completion(timeline)
+    func timeline(in context: Context) async -> Timeline<SimpleEntry> {
+        Timeline(entries: [SimpleEntry(date: Date())], policy: .never)
     }
 }
 

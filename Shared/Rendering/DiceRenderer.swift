@@ -1,6 +1,6 @@
 import SceneKit
 
-class DiceRenderer {
+final class DiceRenderer {
     static func createDiceNode(
         currentNumber: Int,
         isRolling: Bool,

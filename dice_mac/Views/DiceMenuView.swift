@@ -35,9 +35,11 @@ struct DiceMenuView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
-                .background(diceState.isRolling ? Color.gray : Color.blue)
                 .foregroundStyle(.white)
-                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .background(
+                    diceState.isRolling ? Color.gray : Color.blue,
+                    in: RoundedRectangle(cornerRadius: 8)
+                )
             }
             .buttonStyle(.plain)
             .disabled(diceState.isRolling)

@@ -52,6 +52,13 @@
 			);
 			target = F69193AD2D328A3A00594168 /* dice_ios_widgetExtension */;
 		};
+		F69193E22D3290A100594168 /* Exceptions for "dice_ios" folder in "dice_ios" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = F69193982D32805300594168 /* dice_ios */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -67,6 +74,9 @@
 		};
 		F691939A2D32805300594168 /* dice_ios */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F69193E22D3290A100594168 /* Exceptions for "dice_ios" folder in "dice_ios" target */,
+			);
 			path = dice_ios;
 			sourceTree = "<group>";
 		};
@@ -503,6 +513,7 @@
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dice_ios/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "幸运骰子";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -540,6 +551,7 @@
 				DEVELOPMENT_TEAM = 84F8R9TAQN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = dice_ios/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "幸运骰子";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

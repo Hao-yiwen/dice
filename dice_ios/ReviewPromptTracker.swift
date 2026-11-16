@@ -5,6 +5,7 @@ import OSLog
 enum RollTriggerSource: String {
     case button
     case shake
+    case widget
 }
 
 /// 管理评分触发计数与自动评分状态。

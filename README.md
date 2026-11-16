@@ -54,6 +54,16 @@
 
 5. （可选）若需本地签名，在 Signing & Capabilities 中选择自己的 Development Team；仓库默认 Team 为原作者配置，克隆后可能需改为本机账号。
 
+6. iOS 小组件通过 `diceapp://roll` 深链打开主应用并触发掷骰；URL Scheme 已在 `dice_ios/Info.plist` 中声明。
+
+### 静态检查（无需 Xcode）
+
+```bash
+./scripts/verify-project.sh
+```
+
+该脚本会检查部署目标、Info.plist 深链、Scheme 启动配置，以及常见废弃 API/脆弱实现（不执行编译）。
+
 ### 命令行构建（需在 macOS + Xcode 环境）
 
 ```bash

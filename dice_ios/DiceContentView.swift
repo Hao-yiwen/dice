@@ -54,9 +54,11 @@ struct DiceContentView: View {
                     .font(.title3)
                     .frame(maxWidth: diceSize - 32)
                     .padding(.vertical, 16)
-                    .background(diceState.isRolling ? Color.gray : Color.blue)
                     .foregroundStyle(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    .background(
+                        diceState.isRolling ? Color.gray : Color.blue,
+                        in: RoundedRectangle(cornerRadius: 14)
+                    )
                 }
                 .disabled(diceState.isRolling)
 
@@ -94,6 +96,12 @@ struct DiceContentView: View {
                 "[评分流程] 骰子可见朝向已更新 visibleFaceRotationQuarterTurns=\(newValue, privacy: .public) currentNumber=\(diceState.currentNumber, privacy: .public)"
             )
         }
+        .onOpenURL { url in
+            guard url.scheme?.lowercased() == "diceapp", url.host?.lowercased() == "roll" else {
+                return
+            }
+            handleRoll(source: .widget)
+        }
         } // NavigationStack
         .onShake {
             handleRoll(source: .shake)
@@ -129,29 +137,5 @@ struct DiceContentView: View {
 
         logger.info("[评分流程] 自动触发系统评分请求 source=\(source.rawValue, privacy: .public)")
         requestReview()
-    }
-}
-
-
-// 摇一摇检测扩展
-extension View {
-    func onShake(perform action: @escaping () -> Void) -> some View {
-        self.onAppear()
-            .onReceive(NotificationCenter.default.publisher(for: UIDevice.deviceDidShakeNotification)) { _ in
-                action()
-            }
-    }
-}
-
-extension UIDevice {
-    static let deviceDidShakeNotification = Notification.Name(rawValue: "deviceDidShakeNotification")
-}
-
-// 允许检测摇一摇手势
-extension UIWindow {
-    open override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
-        if motion == .motionShake {
-            NotificationCenter.default.post(name: UIDevice.deviceDidShakeNotification, object: nil)
-        }
     }
 }
