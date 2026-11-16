@@ -29,6 +29,11 @@ for rel in required:
     if not (root / rel).exists():
         err(f'missing file: {rel}')
 
+if 'LastUpgradeCheck = 1600;' not in pbx:
+    err('LastUpgradeCheck should be 1600 (project does not require Xcode 27)')
+if 'SWIFT_STRICT_CONCURRENCY = minimal;' not in pbx:
+    err('SWIFT_STRICT_CONCURRENCY minimal not set at project level')
+
 # deployment + swift version
 if set(re.findall(r'MACOSX_DEPLOYMENT_TARGET = ([0-9.]+);', pbx)) != {'14.0'}:
     err('macOS deployment target not unified to 14.0')
@@ -91,5 +96,9 @@ for e in errors:
 if errors:
     sys.exit(1)
 PY
+
+if [[ -x "$ROOT/scripts/swift-syntax-check.sh" ]]; then
+  "$ROOT/scripts/swift-syntax-check.sh"
+fi
 
 echo "All static checks passed."

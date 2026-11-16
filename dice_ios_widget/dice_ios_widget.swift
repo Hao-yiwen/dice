@@ -38,11 +38,7 @@ struct dice_ios_widgetEntryView : View {
             
             // 卡片阴影和边框效果
             RoundedRectangle(cornerRadius: 20)
-                .fill(
-                    colorScheme == .dark ?
-                        Color(UIColor.systemGray6) :
-                        Color.white
-                )
+                .fill(Color(uiColor: .secondarySystemGroupedBackground))
                 .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 2)
                 .shadow(color: .black.opacity(0.05), radius: 3, x: 0, y: 1)
             

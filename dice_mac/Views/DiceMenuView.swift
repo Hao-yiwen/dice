@@ -51,7 +51,7 @@ struct DiceMenuView: View {
                     showingSettings = true
                 }) {
                     Image(systemName: "gear")
-                        .foregroundStyle(.white)
+                        .foregroundStyle(.secondary)
                 }
                 .popover(isPresented: $showingSettings) {
                     Button(action: {

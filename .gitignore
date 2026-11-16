@@ -28,6 +28,7 @@ Package.resolved
 
 # CI/build temp files
 build/
+.swift-toolchain/
 
 # Secrets (never commit)
 *.p12

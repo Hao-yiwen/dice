@@ -8,6 +8,7 @@ import SceneKit
 typealias PlatformImage = UIImage
 #endif
 
+@MainActor
 final class DiceFaceRenderer {
     private static let numbers = [1, 3, 6, 4, 5, 2]
     private static let cachedMaterials: [SCNMaterial] = numbers.map { createDiceMaterial(for: $0) }

@@ -57,7 +57,7 @@ final class DiceState: ObservableObject {
             logger.info("[掷骰] 发现未结束的滚动任务，准备取消旧任务")
         }
         rollResetTask?.cancel()
-        rollResetTask = Task { [weak self] in
+        rollResetTask = Task { @MainActor [weak self] in
             do {
                 try await Task.sleep(for: .seconds(1))
             } catch {

@@ -3,7 +3,7 @@
 ![macOS](https://img.shields.io/badge/macOS-14.0+-00979D?logo=apple&logoColor=white)
 ![iOS](https://img.shields.io/badge/iOS-17.0+-000000?logo=apple&logoColor=white)
 ![Swift](https://img.shields.io/badge/Swift-5_language_mode-FA7343?logo=swift&logoColor=white)
-![Xcode](https://img.shields.io/badge/Xcode-27+-147EFB?logo=xcode&logoColor=white)
+![Xcode](https://img.shields.io/badge/Xcode-16+-147EFB?logo=xcode&logoColor=white)
 
 一个简洁的 3D 骰子应用，支持 macOS 状态栏和 iOS 设备。
 
@@ -28,7 +28,7 @@
 ## 系统要求
 
 - **运行**：macOS 14.0 或更高版本；iOS 17.0 或更高版本
-- **开发构建**：Xcode 27 或更高版本（含 iOS / macOS SDK），Swift 5 语言模式（工程 `SWIFT_VERSION = 5.0`）
+- **开发构建**：**Xcode 16.0+**（需含 iOS 17 / macOS 14 SDK；未使用 Xcode 27 独占特性，更高版本稳定版亦可），Swift 5 语言模式（`SWIFT_VERSION = 5.0`），工程级 `SWIFT_STRICT_CONCURRENCY = minimal`
 - **依赖**：无 CocoaPods / SPM 第三方依赖，仅使用系统框架（SwiftUI、SceneKit、WidgetKit、StoreKit 等）
 
 ## 从源码运行（开发）
@@ -62,7 +62,7 @@
 ./scripts/verify-project.sh
 ```
 
-该脚本会检查部署目标、Info.plist 深链、Scheme 启动配置，以及常见废弃 API/脆弱实现（不执行编译）。
+该脚本会检查部署目标、Info.plist 深链、Scheme 启动配置、常见废弃 API/脆弱实现；若存在 Swift 开源工具链（默认 `.swift-toolchain/`），还会对所有 `.swift` 做 `swift frontend -parse` 语法检查（不链接 Apple SDK，不能替代 `xcodebuild`）。
 
 ### 命令行构建（需在 macOS + Xcode 环境）
 
