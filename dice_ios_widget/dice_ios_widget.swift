@@ -28,15 +28,11 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct dice_ios_widgetEntryView : View {
-    @Environment(\.colorScheme) var colorScheme
     var entry: Provider.Entry
     
     var body: some View {
         ZStack {
-            // 背景
-            Color(UIColor.systemBackground)
-            
-            // 卡片阴影和边框效果
+            // 卡片跟随系统分组背景，深浅色由 UIColor 动态色负责
             RoundedRectangle(cornerRadius: 20)
                 .fill(Color(uiColor: .secondarySystemGroupedBackground))
                 .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 2)
@@ -46,12 +42,8 @@ struct dice_ios_widgetEntryView : View {
             VStack(alignment: .leading, spacing: 0) {
                 // 左上方骰子图标
                 Image(systemName: "die.face.3")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(
-                        colorScheme == .dark ?
-                            Color.white.opacity(0.9) :
-                            Color.black.opacity(0.9)
-                    )
+                    .symbolRenderingMode(.monochrome)
+                    .foregroundStyle(.primary)
                     .font(.system(size: 32, weight: .medium))
                     .padding(.leading, 16)
                     .padding(.top, 16)
@@ -85,14 +77,8 @@ struct dice_ios_widgetEntryView : View {
                 .padding(.bottom, 14)
             }
             
-            // 更清晰的边框
             RoundedRectangle(cornerRadius: 20)
-                .stroke(
-                    colorScheme == .dark ?
-                        Color.white.opacity(0.12) :
-                        Color.black.opacity(0.06),
-                    lineWidth: 1
-                )
+                .stroke(Color.primary.opacity(0.12), lineWidth: 1)
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .widgetURL(URL(string: "diceapp://roll"))
@@ -106,7 +92,7 @@ struct dice_ios_widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             dice_ios_widgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    Color(UIColor.systemBackground)
+                    Color(uiColor: .systemBackground)
                 }
         }
         .configurationDisplayName(L10n.text("widget.display_name"))

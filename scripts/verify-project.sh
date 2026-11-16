@@ -75,8 +75,8 @@ if '.onOpenURL' not in content_view:
     err('DiceContentView missing onOpenURL handler')
 
 shake = (root / 'dice_ios/ShakeMotionDetector.swift').read_text()
-if 'UIViewControllerRepresentable' not in shake:
-    err('ShakeMotionDetector missing representable implementation')
+if 'UIViewRepresentable' not in shake or 'canBecomeFirstResponder' not in shake:
+    err('ShakeMotionDetector must be a first-responder UIView representable')
 
 widget = (root / 'dice_ios_widget/dice_ios_widget.swift').read_text()
 if 'func timeline(in context: Context) async' not in widget:

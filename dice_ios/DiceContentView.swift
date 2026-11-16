@@ -96,13 +96,13 @@ struct DiceContentView: View {
                 "[评分流程] 骰子可见朝向已更新 visibleFaceRotationQuarterTurns=\(newValue, privacy: .public) currentNumber=\(diceState.currentNumber, privacy: .public)"
             )
         }
+        } // NavigationStack
         .onOpenURL { url in
             guard url.scheme?.lowercased() == "diceapp", url.host?.lowercased() == "roll" else {
                 return
             }
             handleRoll(source: .widget)
         }
-        } // NavigationStack
         .onShake {
             handleRoll(source: .shake)
         }
