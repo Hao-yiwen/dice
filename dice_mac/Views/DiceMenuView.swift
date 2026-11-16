@@ -6,6 +6,7 @@
 //
 import SwiftUI
 import SceneKit
+import AppKit
 
 struct DiceMenuView: View {
     @EnvironmentObject var diceState: DiceState
@@ -35,8 +36,8 @@ struct DiceMenuView: View {
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
                 .background(diceState.isRolling ? Color.gray : Color.blue)
-                .foregroundColor(.white)
-                .cornerRadius(8)
+                .foregroundStyle(.white)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             }
             .buttonStyle(.plain)
             .disabled(diceState.isRolling)
@@ -48,7 +49,7 @@ struct DiceMenuView: View {
                     showingSettings = true
                 }) {
                     Image(systemName: "gear")
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                 }
                 .popover(isPresented: $showingSettings) {
                     Button(action: {
@@ -58,7 +59,7 @@ struct DiceMenuView: View {
                             Image(systemName: "power")
                             Text(L10n.text("menu.quit"))
                         }
-                        .foregroundColor(.red)
+                        .foregroundStyle(.red)
                     }
                     .padding()
                 }

@@ -7,6 +7,7 @@
 
 import WidgetKit
 import SwiftUI
+import UIKit
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -86,7 +87,7 @@ struct dice_ios_widgetEntryView : View {
                             )
                         )
                 )
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .padding(.horizontal, 14)
                 .padding(.bottom, 14)
             }

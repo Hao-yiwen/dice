@@ -3,6 +3,7 @@ import SwiftUI
 import SceneKit
 import StoreKit
 import OSLog
+import UIKit
 
 struct DiceContentView: View {
     @EnvironmentObject var diceState: DiceState
@@ -54,8 +55,8 @@ struct DiceContentView: View {
                     .frame(maxWidth: diceSize - 32)
                     .padding(.vertical, 16)
                     .background(diceState.isRolling ? Color.gray : Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(14)
+                    .foregroundStyle(.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
                 }
                 .disabled(diceState.isRolling)
 

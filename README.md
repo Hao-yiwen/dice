@@ -1,8 +1,9 @@
 # 幸运骰子
 
-![macOS](https://img.shields.io/badge/macOS-13.0+-00979D?logo=apple&logoColor=white)
+![macOS](https://img.shields.io/badge/macOS-14.0+-00979D?logo=apple&logoColor=white)
 ![iOS](https://img.shields.io/badge/iOS-17.0+-000000?logo=apple&logoColor=white)
-![SwiftUI](https://img.shields.io/badge/SwiftUI-5.0+-0051C3?logo=swift&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-5_language_mode-FA7343?logo=swift&logoColor=white)
+![Xcode](https://img.shields.io/badge/Xcode-27+-147EFB?logo=xcode&logoColor=white)
 
 一个简洁的 3D 骰子应用，支持 macOS 状态栏和 iOS 设备。
 
@@ -24,7 +25,50 @@
 - 完全离线，无广告，不收集任何数据
 - 支持中英文
 
-## 安装说明
+## 系统要求
+
+- **运行**：macOS 14.0 或更高版本；iOS 17.0 或更高版本
+- **开发构建**：Xcode 27 或更高版本（含 iOS / macOS SDK），Swift 5 语言模式（工程 `SWIFT_VERSION = 5.0`）
+- **依赖**：无 CocoaPods / SPM 第三方依赖，仅使用系统框架（SwiftUI、SceneKit、WidgetKit、StoreKit 等）
+
+## 从源码运行（开发）
+
+1. 克隆仓库：
+
+   ```bash
+   git clone https://github.com/Hao-yiwen/dice.git
+   cd dice
+   ```
+
+2. 用 Xcode 打开工程：
+
+   ```bash
+   open dice.xcodeproj
+   ```
+
+3. 在 Xcode 中选择 Scheme：
+   - **dice**：macOS 菜单栏应用
+   - **dice_ios**：iOS 应用（会嵌入 `dice_ios_widgetExtension` 小组件）
+
+4. 选择目标设备或模拟器 / Mac，点击 Run（⌘R）。
+
+5. （可选）若需本地签名，在 Signing & Capabilities 中选择自己的 Development Team；仓库默认 Team 为原作者配置，克隆后可能需改为本机账号。
+
+### 命令行构建（需在 macOS + Xcode 环境）
+
+```bash
+# macOS
+xcodebuild -project dice.xcodeproj -scheme dice -configuration Debug \
+  -destination 'platform=macOS' build
+
+# iOS 模拟器
+xcodebuild -project dice.xcodeproj -scheme dice_ios -configuration Debug \
+  -destination 'generic/platform=iOS Simulator' build
+```
+
+发布用 macOS DMG（签名与公证）可参考 `scripts/build-macos-dmg.sh`。
+
+## 安装说明（发行版）
 
 ### macOS
 
@@ -35,12 +79,7 @@
 ### iOS
 
 1. 从 App Store 下载安装
-2. 或克隆项目代码，使用 Xcode 打开并构建运行
-
-## 系统要求
-
-- macOS 13.0 或更高版本
-- iOS 17.0 或更高版本
+2. 或按上方「从源码运行」用 Xcode 构建
 
 ## 预览
 
