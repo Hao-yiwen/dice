@@ -1,6 +1,12 @@
 import SceneKit
+#if os(macOS)
+import AppKit
+#else
+import UIKit
+#endif
 
-class DiceRenderer {
+@MainActor
+final class DiceRenderer {
     static func createDiceNode(
         currentNumber: Int,
         isRolling: Bool,
@@ -108,6 +114,7 @@ class DiceRenderer {
             faceRotationQuarterTurns: faceRotationQuarterTurns,
             materials: DiceFaceRenderer.createDiceMaterials()
         )
+        scene.background.contents = NSColor.windowBackgroundColor
         scene.rootNode.addChildNode(diceNode)
         return scene
         #else
@@ -142,9 +149,7 @@ class DiceRenderer {
         )
 
         diceNode.scale = SCNVector3(1.5, 1.5, 1.5)
-        
-        // 设置背景颜色
-        // scene.background.contents = UIColor.white
+        scene.background.contents = UIColor.secondarySystemGroupedBackground
         
         scene.rootNode.addChildNode(diceNode)
         return scene

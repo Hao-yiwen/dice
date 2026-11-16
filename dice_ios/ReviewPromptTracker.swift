@@ -2,12 +2,14 @@ import Foundation
 import OSLog
 
 /// 掷骰触发来源，用于日志区分按钮与摇一摇入口。
-enum RollTriggerSource: String {
+enum RollTriggerSource: String, Sendable {
     case button
     case shake
+    case widget
 }
 
 /// 管理评分触发计数与自动评分状态。
+@MainActor
 final class ReviewPromptTracker {
     private enum Keys {
         static let rollCount = "review.roll_count"

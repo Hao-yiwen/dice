@@ -8,7 +8,8 @@ import SceneKit
 typealias PlatformImage = UIImage
 #endif
 
-class DiceFaceRenderer {
+@MainActor
+final class DiceFaceRenderer {
     private static let numbers = [1, 3, 6, 4, 5, 2]
     private static let cachedMaterials: [SCNMaterial] = numbers.map { createDiceMaterial(for: $0) }
 
@@ -35,74 +36,50 @@ class DiceFaceRenderer {
     static func createDiceFace(number: Int) -> PlatformImage {
         #if os(macOS)
         let size = NSSize(width: 512, height: 512)
-        let image = NSImage(size: size)
-        
-        image.lockFocus()
-        
-        // 绘制白色背景
-        NSColor.white.setFill()
-        NSRect(origin: .zero, size: size).fill()
-        
-        // 绘制黑色点
-        NSColor.black.setFill()
         let dots = dotsForNumber(number)
         let dotSize = CGSize(width: 80, height: 80)
-        
-        for position in dots {
-            let rect = NSRect(
-                x: position.x * size.width - dotSize.width/2,
-                y: position.y * size.height - dotSize.height/2,
-                width: dotSize.width,
-                height: dotSize.height
-            )
-            NSBezierPath(ovalIn: rect).fill()
+
+        return NSImage(size: size, flipped: false) { rect in
+            NSColor.white.setFill()
+            rect.fill()
+
+            NSColor.black.setFill()
+            for position in dots {
+                let dotRect = NSRect(
+                    x: position.x * size.width - dotSize.width / 2,
+                    y: position.y * size.height - dotSize.height / 2,
+                    width: dotSize.width,
+                    height: dotSize.height
+                )
+                NSBezierPath(ovalIn: dotRect).fill()
+            }
+            return true
         }
-        
-        image.unlockFocus()
-        return image
         
         #else
         let size = CGSize(width: 512, height: 512)
-        UIGraphicsBeginImageContextWithOptions(size, true, 0.0)  // 改为 true，表示不透明
-
-        guard let context = UIGraphicsGetCurrentContext() else {
-            return UIImage()
-        }
-
-        // 绘制白色背景
-        UIColor.white.setFill()
-        context.fill(CGRect(origin: .zero, size: size))
-
-        // 绘制黑色点
-        UIColor.black.setFill()
         let dots = dotsForNumber(number)
         let dotSize = CGSize(width: 80, height: 80)
+        let format = UIGraphicsImageRendererFormat.default()
+        format.opaque = true
+        format.scale = 1.0
+        let renderer = UIGraphicsImageRenderer(size: size, format: format)
 
-        for position in dots {
-            let rect = CGRect(
-                x: position.x * size.width - dotSize.width/2,
-                y: position.y * size.height - dotSize.height/2,
-                width: dotSize.width,
-                height: dotSize.height
-            )
-            context.fillEllipse(in: rect)
+        return renderer.image { context in
+            UIColor.white.setFill()
+            context.fill(CGRect(origin: .zero, size: size))
+
+            UIColor.black.setFill()
+            for position in dots {
+                let rect = CGRect(
+                    x: position.x * size.width - dotSize.width / 2,
+                    y: position.y * size.height - dotSize.height / 2,
+                    width: dotSize.width,
+                    height: dotSize.height
+                )
+                context.cgContext.fillEllipse(in: rect)
+            }
         }
-
-        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
-            UIGraphicsEndImageContext()
-            return UIImage()
-        }
-        UIGraphicsEndImageContext()
-
-        // 确保图像有效
-        if image.size.width == 0 || image.size.height == 0 {
-            #if DEBUG
-            print("Warning: Generated image has zero size")
-            #endif
-            return UIImage()
-        }
-
-        return image
         #endif
     }
     

@@ -7,21 +7,19 @@
 
 import WidgetKit
 import SwiftUI
+import UIKit
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
         SimpleEntry(date: Date())
     }
 
-    func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        completion(entry)
+    func snapshot(in context: Context) async -> SimpleEntry {
+        SimpleEntry(date: Date())
     }
 
-    func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        let entry = SimpleEntry(date: Date())
-        let timeline = Timeline(entries: [entry], policy: .never)
-        completion(timeline)
+    func timeline(in context: Context) async -> Timeline<SimpleEntry> {
+        Timeline(entries: [SimpleEntry(date: Date())], policy: .never)
     }
 }
 
@@ -30,21 +28,13 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct dice_ios_widgetEntryView : View {
-    @Environment(\.colorScheme) var colorScheme
     var entry: Provider.Entry
     
     var body: some View {
         ZStack {
-            // 背景
-            Color(UIColor.systemBackground)
-            
-            // 卡片阴影和边框效果
+            // 卡片跟随系统分组背景，深浅色由 UIColor 动态色负责
             RoundedRectangle(cornerRadius: 20)
-                .fill(
-                    colorScheme == .dark ?
-                        Color(UIColor.systemGray6) :
-                        Color.white
-                )
+                .fill(Color(uiColor: .secondarySystemGroupedBackground))
                 .shadow(color: .black.opacity(0.08), radius: 8, x: 0, y: 2)
                 .shadow(color: .black.opacity(0.05), radius: 3, x: 0, y: 1)
             
@@ -52,12 +42,8 @@ struct dice_ios_widgetEntryView : View {
             VStack(alignment: .leading, spacing: 0) {
                 // 左上方骰子图标
                 Image(systemName: "die.face.3")
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(
-                        colorScheme == .dark ?
-                            Color.white.opacity(0.9) :
-                            Color.black.opacity(0.9)
-                    )
+                    .symbolRenderingMode(.monochrome)
+                    .foregroundStyle(.primary)
                     .font(.system(size: 32, weight: .medium))
                     .padding(.leading, 16)
                     .padding(.top, 16)
@@ -86,19 +72,13 @@ struct dice_ios_widgetEntryView : View {
                             )
                         )
                 )
-                .foregroundColor(.white)
+                .foregroundStyle(.white)
                 .padding(.horizontal, 14)
                 .padding(.bottom, 14)
             }
             
-            // 更清晰的边框
             RoundedRectangle(cornerRadius: 20)
-                .stroke(
-                    colorScheme == .dark ?
-                        Color.white.opacity(0.12) :
-                        Color.black.opacity(0.06),
-                    lineWidth: 1
-                )
+                .stroke(Color.primary.opacity(0.12), lineWidth: 1)
         }
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .widgetURL(URL(string: "diceapp://roll"))
@@ -112,7 +92,7 @@ struct dice_ios_widget: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             dice_ios_widgetEntryView(entry: entry)
                 .containerBackground(for: .widget) {
-                    Color(UIColor.systemBackground)
+                    Color(uiColor: .systemBackground)
                 }
         }
         .configurationDisplayName(L10n.text("widget.display_name"))
